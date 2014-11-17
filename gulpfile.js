@@ -12,8 +12,23 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass("bootstrap.scss")
-       .routes()
-       .events()
-       .phpUnit();
+    mix
+        .less("application.less")
+        .styles(["css/application.css"])
+        .coffee()
+        .scripts([
+            "../components/jquery/dist/jquery.min.js",
+            "../components/underscore/underscore-min.js",
+            "../components/backbone/backbone.js",
+            "../components/lawnchair/src/Lawnchair.js",
+            "../components/lawnchair/src/adapters/dom.js",
+            "../components/lawnchair/src/adapters/indexed-db.js",
+            "../components/lawnchair/src/adapters/webkit-sqlite.js",
+            "../components/backbone-lawnchair/backbone.lawnchair.js",
+            "js/application.js"
+        ])
+        .version(["css/all.css", "js/all.js"])
+        .routes()
+        .events()
+        .phpUnit();
 });
