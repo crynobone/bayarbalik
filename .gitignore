@@ -12,3 +12,7 @@
 /node_modules/*
 /components/*
 
+# Elixir-Generated Files
+/public/js/*
+/public/css/*
+
