@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => 'mysql',
+    'default' => 'primary',
 
     /*
     |--------------------------------------------------------------------------
@@ -46,41 +46,15 @@ return [
 
     'connections' => [
 
-        'sqlite' => [
-            'driver'   => 'sqlite',
-            'database' => storage_path().'/database.sqlite',
-            'prefix'   => '',
-        ],
-
-        'mysql' => [
+        'primary' => [
             'driver'    => 'mysql',
-            'host'      => 'localhost',
-            'database'  => 'forge',
-            'username'  => 'forge',
-            'password'  => '',
+            'host'      => getenv('DB.HOST') ?: '127.0.0.1',
+            'database'  => getenv('DB.DATABASE') ?: 'bayarbalik',
+            'username'  => getenv('DB.DATABASE') ?: 'root',
+            'password'  => getenv('DB.DATABASE') ?: 'root',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
-        ],
-
-        'pgsql' => [
-            'driver'   => 'pgsql',
-            'host'     => 'localhost',
-            'database' => 'forge',
-            'username' => 'forge',
-            'password' => '',
-            'charset'  => 'utf8',
-            'prefix'   => '',
-            'schema'   => 'public',
-        ],
-
-        'sqlsrv' => [
-            'driver'   => 'sqlsrv',
-            'host'     => 'localhost',
-            'database' => 'database',
-            'username' => 'root',
-            'password' => '',
-            'prefix'   => '',
         ],
 
     ],
