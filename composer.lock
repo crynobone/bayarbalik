@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "371f081976e365289501173335731bbe",
+    "hash": "8b3c68dad168b121ff0676492a824c52",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -206,89 +206,6 @@
                 "parser"
             ],
             "time": "2013-01-12 18:59:04"
-        },
-        {
-            "name": "erusev/parsedown",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/erusev/parsedown.git",
-                "reference": "da5d75e97e1ed19e57bd54fa6cb595a6a0879a67"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/da5d75e97e1ed19e57bd54fa6cb595a6a0879a67",
-                "reference": "da5d75e97e1ed19e57bd54fa6cb595a6a0879a67",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Parsedown": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Emanuil Rusev",
-                    "email": "hello@erusev.com",
-                    "homepage": "http://erusev.com"
-                }
-            ],
-            "description": "Parser for Markdown.",
-            "homepage": "http://parsedown.org",
-            "keywords": [
-                "markdown",
-                "parser"
-            ],
-            "time": "2014-10-29 20:29:46"
-        },
-        {
-            "name": "erusev/parsedown-extra",
-            "version": "0.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/erusev/parsedown-extra.git",
-                "reference": "e81515ed5549871b16ece3aaab8cf023930b1e7e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown-extra/zipball/e81515ed5549871b16ece3aaab8cf023930b1e7e",
-                "reference": "e81515ed5549871b16ece3aaab8cf023930b1e7e",
-                "shasum": ""
-            },
-            "require": {
-                "erusev/parsedown": "~1.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "ParsedownExtra": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Emanuil Rusev",
-                    "email": "hello@erusev.com",
-                    "homepage": "http://erusev.com"
-                }
-            ],
-            "description": "An extension of Parsedown that adds support for Markdown Extra.",
-            "homepage": "https://github.com/erusev/parsedown-extra",
-            "keywords": [
-                "markdown",
-                "markdown extra",
-                "parsedown",
-                "parser"
-            ],
-            "time": "2014-10-29 01:21:00"
         },
         {
             "name": "illuminate/html",
@@ -1038,67 +955,6 @@
             "time": "2014-11-15 03:20:27"
         },
         {
-            "name": "orchestra/facile",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchestral/facile.git",
-                "reference": "8771034c229fd380d3bf3722a73f9a9d1713e907"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/facile/zipball/8771034c229fd380d3bf3722a73f9a9d1713e907",
-                "reference": "8771034c229fd380d3bf3722a73f9a9d1713e907",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "5.0.*",
-                "orchestra/support-facades": "3.0.*",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "illuminate/database": "5.0.*",
-                "illuminate/http": "5.0.*",
-                "illuminate/pagination": "5.0.*",
-                "mockery/mockery": "0.9.*",
-                "orchestra/support-core": "3.0.*"
-            },
-            "suggest": {
-                "laravel/framework": "Allow using orchestra/facile component outside of Orchestra Platform",
-                "orchestra/foundation": "Allow using orchestra/facile with Orchestra Platform"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Orchestra\\Facile\\": "src/Facile/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mior Muhammad Zaki",
-                    "email": "crynobone@gmail.com",
-                    "homepage": "https://github.com/crynobone"
-                }
-            ],
-            "description": "Facile Component for Orchestra Platform",
-            "homepage": "http://orchestraplatform.com/docs/latest/components/facile/",
-            "keywords": [
-                "laravel",
-                "orchestra-platform",
-                "orchestral"
-            ],
-            "time": "2014-11-09 11:19:10"
-        },
-        {
             "name": "orchestra/foundation",
             "version": "dev-master",
             "source": {
@@ -1763,64 +1619,6 @@
                 "orchestral"
             ],
             "time": "2014-11-11 09:57:15"
-        },
-        {
-            "name": "orchestra/story",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/orchestral/story.git",
-                "reference": "ac036420e2e5cd8e3d571bdc1384c834c05f0f87"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/story/zipball/ac036420e2e5cd8e3d571bdc1384c834c05f0f87",
-                "reference": "ac036420e2e5cd8e3d571bdc1384c834c05f0f87",
-                "shasum": ""
-            },
-            "require": {
-                "erusev/parsedown-extra": "0.2.*",
-                "orchestra/facile": "3.0.*",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.9.*",
-                "orchestra/foundation": "3.0.*",
-                "orchestra/testbench": "3.0.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/migrations"
-                ],
-                "psr-4": {
-                    "Orchestra\\Story\\": "src/Story/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mior Muhammad Zaki",
-                    "email": "crynobone@gmail.com",
-                    "homepage": "https://github.com/crynobone"
-                }
-            ],
-            "description": "CMS Extension for Orchestra Platform",
-            "keywords": [
-                "cms",
-                "laravel",
-                "orchestra-platform",
-                "orchestral"
-            ],
-            "time": "2014-11-14 16:24:31"
         },
         {
             "name": "orchestra/support",
