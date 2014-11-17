@@ -7,3 +7,8 @@
 
 # Vagrant
 /.vagrant/*
+
+# Node.js
+/node_modules/*
+/components/*
+
