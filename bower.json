@@ -1,0 +1,18 @@
+{
+  "name": "BayarBalik",
+  "version": "0.0.0",
+  "homepage": "https://github.com/crynobone/bayarbalik",
+  "authors": [
+    "Mior Muhammad Zaki <hello@orchestraplatform.com>",
+    "Zulfa Juniadi Zulkifli <zulfajuniadi@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test",
+    "tests"
+  ]
+}
