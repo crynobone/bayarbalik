@@ -25,6 +25,9 @@ elixir(function(mix) {
             "../components/lawnchair/src/adapters/indexed-db.js",
             "../components/lawnchair/src/adapters/webkit-sqlite.js",
             "../components/backbone-lawnchair/backbone.lawnchair.js",
+            "../components/numeral/min/numeral.min.js",
+            "../components/notifyjs/dist/notify-combined.min.js",
+            "../components/lil-uuid/uuid.min.js",
             "js/application.js"
         ])
         .version(["css/all.css", "js/all.js"])
