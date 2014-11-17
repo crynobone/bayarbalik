@@ -1,6 +1,8 @@
+@theme: 'yeti';
+
 @import 'components/bootstrap/less/bootstrap.less';
-@import 'components/bootswatch/journal/variables.less';
-@import 'components/bootswatch/journal/bootswatch.less';
+@import 'components/bootswatch/@{theme}/variables.less';
+@import 'components/bootswatch/@{theme}/bootswatch.less';
 
 html, body {
     height: 100%;
@@ -8,4 +10,17 @@ html, body {
 
 body {
     overflow-y: scroll;
+}
+
+h1.lead {
+    margin-top: 90px;
+    font-size: 4em;
+}
+
+.lead-buttons {
+    margin-top: 60px;
+    a {
+        min-width: 240px;
+        margin: 0 10px;
+    }
 }
