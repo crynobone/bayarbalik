@@ -4,6 +4,10 @@
 
 cd /vagrant/
 
+if [ -f ./storage/framework/compiled.php ]; then
+    rm storage/framework/compiled.php
+fi
+
 if [ ! -f .env ]; then
     cp ./build/provision/.env .env
 fi
