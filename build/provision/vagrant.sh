@@ -4,4 +4,8 @@
 
 cd /vagrant/
 
+if [ ! -f .env ]; then
+    cp ./build/provision/.env .env
+fi
+
 composer install --prefer-dist --no-dev
