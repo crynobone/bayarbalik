@@ -162,8 +162,6 @@ return [
         'Orchestra\Foundation\ConsoleSupportServiceProvider',
         'Orchestra\Foundation\FilterServiceProvider',
         'Orchestra\Foundation\FoundationServiceProvider',
-
-        'Orchestra\Installation\InstallerServiceProvider',
     ],
 
     /*
