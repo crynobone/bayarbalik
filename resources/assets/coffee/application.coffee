@@ -165,7 +165,8 @@ IOUDetailView = Backbone.View.extend
 UOMEIndexView = Backbone.View.extend
     template: _.template $('#uome-index-template').html()
     render: ->
-        @$el.html @template()       
+        @$el.html @template()    
+        navbar.show()   
     initialize: ->
         @render()
     hash: 'uome'
@@ -175,7 +176,7 @@ base = new BaseView
     el: '#output'
 
 # Router
-HutangRouter = Backbone.Router.extend
+AppRouter = Backbone.Router.extend
     routes:
         'iou'     : 'iouIndex'
         'iou/:type'  : 'iouDetails'
@@ -192,5 +193,5 @@ HutangRouter = Backbone.Router.extend
         base.render HomeView
 
 $(document).on 'dataready', ->
-    router = new HutangRouter
+    router = new AppRouter
     Backbone.history.start()
