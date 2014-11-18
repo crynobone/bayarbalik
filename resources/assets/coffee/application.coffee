@@ -11,7 +11,9 @@ DebtsCollection = Backbone.Collection.extend
     model: DebtModel
     lawnchair: new Lawnchair({name: "Hutangs"}, new Function())
     initialize: ->
-        @fetch()
+        @fetch
+            success: ->
+                $(document).trigger 'dataready'
         return @
 
 debts = window.debts = new DebtsCollection
@@ -38,6 +40,8 @@ navbar = new NavbarView
 BaseView = Backbone.View.extend
     render: (childView) ->
         if @child
+            if @child.name == childView.prototype.name
+                return @child.trigger 'resetstate'
             @child.undelegateEvents()
             @child.remove()
         div = $ '<div/>'
@@ -48,7 +52,14 @@ BaseView = Backbone.View.extend
             $('.navbar-nav li').removeClass 'active'
             navbar.setActive child.hash
         child.trigger 'rendered'
+        child
     initialize: ->
+        @on 'subroute', (args) ->
+            if(!@child || @child.name != args[1].prototype.name)
+                @render args[1]
+                    .trigger 'subroute', args[0]
+            else if @child
+                @child.trigger 'subroute', args[0]
         @render HomeView
 
 HomeView = Backbone.View.extend
@@ -59,6 +70,7 @@ HomeView = Backbone.View.extend
     initialize: ->
         @render()
     hash: 'home'
+    name: 'HomeView'
 
 IOUIndexView = Backbone.View.extend
     collection: debts
@@ -97,23 +109,67 @@ IOUIndexView = Backbone.View.extend
         someday: @collection.where({payment_interval: 'Someday'}).reduce (prev, current) ->
                 prev + current.get('loan_amount')
             , 0
+    detailsTemplateData: ->
+        {}
     template: _.template $('#iou-index-template').html()
     render: ->
         @$el.html @template @templateData()
         navbar.show()
+    renderDetails: (type) ->
+        @removeChild
+        div = $('<div/>')
+        @child = new IOUDetailView
+            el: div
+            type: type
+        @showDetails()
+        $('#iou-details').html div
+    showDetails: ->
+        $('#new-iou')
+            .removeClass 'animated bounceInRight'
+        $('#iou-details')
+            .addClass 'animated bounceInRight'
+    showForm: ->
+        $('#new-iou')
+            .addClass 'animated bounceInRight'
+        $('#iou-details')
+            .removeClass 'animated bounceInRight'
+    remove: ->
+        @removeChild
+        Backbone.View.prototype.remove.apply(this, arguments);
+    removeChild: ->
+        if @child
+            @child.undelegateEvents()
+            @child.remove()
     initialize: ->
         @render()
         @listenTo @collection, 'add update remove', @render
+        @on 'subroute', (type) ->
+            @renderDetails type
+        @on 'resetstate', () ->
+            @showForm()
     hash: 'iou'
+    name: 'IOUIndexView'
+
+IOUDetailView = Backbone.View.extend
+    collection: debts
+    templateData: ->
+        type: @type
+    template: _.template $('#iou-details-template').html()
+    render: ->
+        @$el.html @template @templateData()
+        navbar.show()
+    initialize: (options) ->
+        @type = options.type
+        @render()
 
 UOMEIndexView = Backbone.View.extend
     template: _.template $('#uome-index-template').html()
     render: ->
         @$el.html @template()       
-        navbar.show()
     initialize: ->
         @render()
     hash: 'uome'
+    name: 'UOMEIndexView'
 
 base = new BaseView
     el: '#output'
@@ -122,16 +178,19 @@ base = new BaseView
 HutangRouter = Backbone.Router.extend
     routes:
         'iou'     : 'iouIndex'
-        'iou:id'  : 'iouDetails'
+        'iou/:type'  : 'iouDetails'
         'uome'    : 'uomeIndex'
-        'uome:id' : 'uomeDetails'
+        'uome/:type' : 'uomeDetails'
         '*path'   : 'defaultRoute'
     iouIndex: ->
         base.render IOUIndexView
+    iouDetails: (type) ->
+        base.trigger 'subroute', [type, IOUIndexView]
     uomeIndex: ->
         base.render UOMEIndexView
     defaultRoute: ->
         base.render HomeView
 
-router = new HutangRouter
-Backbone.history.start()
+$(document).on 'dataready', ->
+    router = new HutangRouter
+    Backbone.history.start()

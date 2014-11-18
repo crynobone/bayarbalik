@@ -4,6 +4,9 @@
 @import 'components/bootswatch/@{theme}/variables.less';
 @import 'components/bootswatch/@{theme}/bootswatch.less';
 
+@greyish: #6f6f6f;
+@very-light-grey: #e9e9e9;
+
 html, body {
     height: 100%;
 }
@@ -17,10 +20,53 @@ h1.lead {
     font-size: 4em;
 }
 
+.section-heading {
+    font-size: 32px;
+    margin-bottom: 18px;
+    font-weight: normal;
+}
+
+.debts-summary {
+    border-right: 1px solid @very-light-grey;
+    h2:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
 .lead-buttons {
     margin-top: 60px;
     a {
         min-width: 240px;
         margin: 0 10px;
+    }
+}
+
+.form-group {
+    margin-bottom: 32px;
+}
+
+label, .control-label, .help-block, .checkbox, .radio {
+    font-size: 24px;
+    color: @greyish;
+    font-weight: 300;
+}
+
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+    margin-top: 10px;
+    font-weight: 300;
+}
+
+.radio-inline, .checkbox-inline {
+    font-weight: 300;
+}
+
+#new-iou, #iou-details {
+    display: none;
+    &.animated {
+        display: block
     }
 }

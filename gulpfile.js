@@ -14,7 +14,7 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix
         .less("application.less")
-        .styles(["css/application.css"])
+        .styles(["../components/animate.css/animate.min.css", "css/application.css"])
         .coffee()
         .scripts([
             "../components/jquery/dist/jquery.min.js",

@@ -43,16 +43,16 @@
 <script type="text/template" id="iou-index-template">
     <div class="container">
         <div class="row">
-            <div class="col-sm-4 text-right">
+            <div class="col-sm-4 text-right debts-summary animated bounceInLeft">
                 <h3>Weekly</h3>
-                <h2><%-numeral(weekly).format('0,0.00')%></h2>
+                <h2><a href="#iou/Week"><%-numeral(weekly).format('0,0.00')%></a></h2>
                 <h3>Monthly</h3>
-                <h2><%-numeral(monthly).format('0,0.00')%></h2>
+                <h2><a href="#iou/Month"><%-numeral(monthly).format('0,0.00')%></a></h2>
                 <h3>Someday</h3>
-                <h2><%-numeral(someday).format('0,0.00')%></h2>
+                <h2><a href="#iou/Someday"><%-numeral(someday).format('0,0.00')%></a></h2>
             </div>
-            <div class="col-sm-8 ">
-                <h3>Track new debt</h3>
+            <div id="new-iou" class="col-sm-8 animated bounceInRight">
+                <h3 class="section-heading">Track new debt</h3>
                 <form role="form">
                     <div class="form-group">
                         <label class="control-label lead" for="loan_from">I Owe</label>
@@ -88,8 +88,14 @@
                     <button type="submit" class="btn btn-default btn-lg btn-primary col-sm-4">Save</button>
                 </form>
             </div>
+            <div class="col-sm-8" id="iou-details"></div>
         </div>
     </div>
+</script>
+
+<script type="text/template" id="iou-details-template">
+    <a href="#iou">← Back</a>
+    <h1><%-type%> Details</h1>
 </script>
 
 <script type="text/template" id="uome-index-template">
