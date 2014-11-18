@@ -2620,92 +2620,57 @@ Backbone.sync = (function() {
 (function(e,i){if(typeof define==="function"&&define.amd){define(["exports"],i)}else if(typeof exports==="object"){i(exports);if(typeof module==="object"&&module!==null){module.exports=exports.uuid}}else{i(e.lil=e.lil||{})}})(this,function(e){var i="0.1.0";var t={3:/^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$/i,4:/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,5:/^[0-9A-F]{8}-[0-9A-F]{4}-5[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,all:/^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i};function A(){var e="",i,t;for(i=0;i<32;i++){t=Math.random()*16|0;if(i===8||i===12||i===16||i===20)e+="-";e+=(i===12?4:i===16?t&3|8:t).toString(16)}return e}function o(e,i){var A=t[i?String(i):"all"];return A&&A.test(e)}A.isUUID=o;A.VERSION=i;e.uuid=A;e.isUUID=o});
 //# sourceMappingURL=uuid.min.js.map
 (function() {
-  var BaseView, DebtModel, DebtsCollection, HomeView, HutangRouter, IOUIndexView, NavbarView, UOMEIndexView, base, debts, navbar, root, router,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+  var AppRouter, BaseView, DebtModel, DebtsCollection, HomeView, IOUDetailView, IOUIndexView, NavbarView, UOMEIndexView, base, debts, navbar;
 
-  root = this;
-
-  DebtModel = (function(_super) {
-    __extends(DebtModel, _super);
-
-    function DebtModel() {
-      return DebtModel.__super__.constructor.apply(this, arguments);
-    }
-
-    DebtModel.prototype.defaults = {
+  DebtModel = Backbone.Model.extend({
+    defaults: {
       created_at: Date.now(),
       updated_at: Date.now()
-    };
-
-    DebtModel.prototype.initialize = function() {
+    },
+    initialize: function() {
       return this;
-    };
-
-    return DebtModel;
-
-  })(Backbone.Model);
-
-  DebtsCollection = (function(_super) {
-    __extends(DebtsCollection, _super);
-
-    function DebtsCollection() {
-      return DebtsCollection.__super__.constructor.apply(this, arguments);
     }
+  });
 
-    DebtsCollection.prototype.model = DebtModel;
-
-    DebtsCollection.prototype.lawnchair = new Lawnchair({
+  DebtsCollection = Backbone.Collection.extend({
+    model: DebtModel,
+    lawnchair: new Lawnchair({
       name: "Hutangs"
-    }, new Function());
-
-    DebtsCollection.prototype.initialize = function() {
-      this.fetch();
+    }, new Function()),
+    initialize: function() {
+      this.fetch({
+        success: function() {
+          return $(document).trigger('dataready');
+        }
+      });
       return this;
-    };
-
-    return DebtsCollection;
-
-  })(Backbone.Collection);
-
-  debts = root.debts = new DebtsCollection;
-
-  NavbarView = (function(_super) {
-    __extends(NavbarView, _super);
-
-    function NavbarView() {
-      return NavbarView.__super__.constructor.apply(this, arguments);
     }
+  });
 
-    NavbarView.prototype.template = _.template($('#navbar-template').html());
+  debts = window.debts = new DebtsCollection;
 
-    NavbarView.prototype.setActive = function(id) {
+  NavbarView = Backbone.View.extend({
+    template: _.template($('#navbar-template').html()),
+    setActive: function(id) {
       return $('[href=#' + id + ']').parent().addClass('active');
-    };
-
-    NavbarView.prototype.hide = function() {
+    },
+    hide: function() {
       if (!this.$el.is(':hidden')) {
         return this.$el.hide();
       }
-    };
-
-    NavbarView.prototype.show = function() {
+    },
+    show: function() {
       if (this.$el.is(':hidden')) {
         return this.$el.show();
       }
-    };
-
-    NavbarView.prototype.render = function() {
+    },
+    render: function() {
       return this.$el.html(this.template());
-    };
-
-    NavbarView.prototype.initialize = function() {
+    },
+    initialize: function() {
       return this.render();
-    };
-
-    return NavbarView;
-
-  })(Backbone.View);
+    }
+  });
 
   navbar = new NavbarView({
     el: '#navbar'
@@ -2715,6 +2680,9 @@ Backbone.sync = (function() {
     render: function(childView) {
       var child, div;
       if (this.child) {
+        if (this.child.name === childView.prototype.name) {
+          return this.child.trigger('resetstate');
+        }
         this.child.undelegateEvents();
         this.child.remove();
       }
@@ -2727,47 +2695,37 @@ Backbone.sync = (function() {
         $('.navbar-nav li').removeClass('active');
         navbar.setActive(child.hash);
       }
-      return child.trigger('rendered');
+      child.trigger('rendered');
+      return child;
     },
     initialize: function() {
+      this.on('subroute', function(args) {
+        if (!this.child || this.child.name !== args[1].prototype.name) {
+          return this.render(args[1]).trigger('subroute', args[0]);
+        } else if (this.child) {
+          return this.child.trigger('subroute', args[0]);
+        }
+      });
       return this.render(HomeView);
     }
   });
 
-  HomeView = (function(_super) {
-    __extends(HomeView, _super);
-
-    function HomeView() {
-      return HomeView.__super__.constructor.apply(this, arguments);
-    }
-
-    HomeView.prototype.template = _.template($('#output').html());
-
-    HomeView.prototype.render = function() {
+  HomeView = Backbone.View.extend({
+    template: _.template($('#output').html()),
+    render: function() {
       this.$el.html(this.template());
       return navbar.hide();
-    };
-
-    HomeView.prototype.initialize = function() {
+    },
+    initialize: function() {
       return this.render();
-    };
+    },
+    hash: 'home',
+    name: 'HomeView'
+  });
 
-    HomeView.prototype.hash = 'home';
-
-    return HomeView;
-
-  })(Backbone.View);
-
-  IOUIndexView = (function(_super) {
-    __extends(IOUIndexView, _super);
-
-    function IOUIndexView() {
-      return IOUIndexView.__super__.constructor.apply(this, arguments);
-    }
-
-    IOUIndexView.prototype.collection = debts;
-
-    IOUIndexView.prototype.events = {
+  IOUIndexView = Backbone.View.extend({
+    collection: debts,
+    events: {
       'change .recalculate': 'recalculate',
       'submit': function(e) {
         e.preventDefault();
@@ -2775,9 +2733,8 @@ Backbone.sync = (function() {
         this.collection.create(this.recalculate());
         return false;
       }
-    };
-
-    IOUIndexView.prototype.recalculate = function(e) {
+    },
+    recalculate: function(e) {
       var intervals, loan_amount, payment_interval;
       payment_interval = $('[name=payment_interval]:checked', this.el).val();
       if (payment_interval === 'Someday') {
@@ -2799,9 +2756,8 @@ Backbone.sync = (function() {
         loan_from: $('[name=loan_from]', this.el).val(),
         additional_notes: $('[name=additional_notes]', this.el).val()
       };
-    };
-
-    IOUIndexView.prototype.templateData = function() {
+    },
+    templateData: function() {
       return {
         monthly: this.collection.where({
           payment_interval: 'Month'
@@ -2819,87 +2775,119 @@ Backbone.sync = (function() {
           return prev + current.get('loan_amount');
         }, 0)
       };
-    };
-
-    IOUIndexView.prototype.template = _.template($('#iou-index-template').html());
-
-    IOUIndexView.prototype.render = function() {
+    },
+    detailsTemplateData: function() {
+      return {};
+    },
+    template: _.template($('#iou-index-template').html()),
+    render: function() {
       this.$el.html(this.template(this.templateData()));
       return navbar.show();
-    };
-
-    IOUIndexView.prototype.initialize = function() {
+    },
+    renderDetails: function(type) {
+      var div;
+      this.removeChild;
+      div = $('<div/>');
+      this.child = new IOUDetailView({
+        el: div,
+        type: type
+      });
+      this.showDetails();
+      return $('#iou-details').html(div);
+    },
+    showDetails: function() {
+      $('#new-iou').removeClass('animated bounceInRight');
+      return $('#iou-details').addClass('animated bounceInRight');
+    },
+    showForm: function() {
+      $('#new-iou').addClass('animated bounceInRight');
+      return $('#iou-details').removeClass('animated bounceInRight');
+    },
+    remove: function() {
+      this.removeChild;
+      return Backbone.View.prototype.remove.apply(this, arguments);
+    },
+    removeChild: function() {
+      if (this.child) {
+        this.child.undelegateEvents();
+        return this.child.remove();
+      }
+    },
+    initialize: function() {
       this.render();
-      return this.listenTo(this.collection, 'add update remove', this.render);
-    };
+      this.listenTo(this.collection, 'add update remove', this.render);
+      this.on('subroute', function(type) {
+        return this.renderDetails(type);
+      });
+      return this.on('resetstate', function() {
+        return this.showForm();
+      });
+    },
+    hash: 'iou',
+    name: 'IOUIndexView'
+  });
 
-    IOUIndexView.prototype.hash = 'iou';
-
-    return IOUIndexView;
-
-  })(Backbone.View);
-
-  UOMEIndexView = (function(_super) {
-    __extends(UOMEIndexView, _super);
-
-    function UOMEIndexView() {
-      return UOMEIndexView.__super__.constructor.apply(this, arguments);
+  IOUDetailView = Backbone.View.extend({
+    collection: debts,
+    templateData: function() {
+      return {
+        type: this.type
+      };
+    },
+    template: _.template($('#iou-details-template').html()),
+    render: function() {
+      this.$el.html(this.template(this.templateData()));
+      return navbar.show();
+    },
+    initialize: function(options) {
+      this.type = options.type;
+      return this.render();
     }
+  });
 
-    UOMEIndexView.prototype.template = _.template($('#uome-index-template').html());
-
-    UOMEIndexView.prototype.render = function() {
+  UOMEIndexView = Backbone.View.extend({
+    template: _.template($('#uome-index-template').html()),
+    render: function() {
       this.$el.html(this.template());
       return navbar.show();
-    };
-
-    UOMEIndexView.prototype.initialize = function() {
+    },
+    initialize: function() {
       return this.render();
-    };
-
-    UOMEIndexView.prototype.hash = 'uome';
-
-    return UOMEIndexView;
-
-  })(Backbone.View);
+    },
+    hash: 'uome',
+    name: 'UOMEIndexView'
+  });
 
   base = new BaseView({
     el: '#output'
   });
 
-  HutangRouter = (function(_super) {
-    __extends(HutangRouter, _super);
-
-    function HutangRouter() {
-      return HutangRouter.__super__.constructor.apply(this, arguments);
-    }
-
-    HutangRouter.prototype.routes = {
+  AppRouter = Backbone.Router.extend({
+    routes: {
       'iou': 'iouIndex',
-      'iou:id': 'iouDetails',
+      'iou/:type': 'iouDetails',
       'uome': 'uomeIndex',
-      'uome:id': 'uomeDetails',
+      'uome/:type': 'uomeDetails',
       '*path': 'defaultRoute'
-    };
-
-    HutangRouter.prototype.iouIndex = function() {
+    },
+    iouIndex: function() {
       return base.render(IOUIndexView);
-    };
-
-    HutangRouter.prototype.uomeIndex = function() {
+    },
+    iouDetails: function(type) {
+      return base.trigger('subroute', [type, IOUIndexView]);
+    },
+    uomeIndex: function() {
       return base.render(UOMEIndexView);
-    };
-
-    HutangRouter.prototype.defaultRoute = function() {
+    },
+    defaultRoute: function() {
       return base.render(HomeView);
-    };
+    }
+  });
 
-    return HutangRouter;
-
-  })(Backbone.Router);
-
-  router = new HutangRouter;
-
-  Backbone.history.start();
+  $(document).on('dataready', function() {
+    var router;
+    router = new AppRouter;
+    return Backbone.history.start();
+  });
 
 }).call(this);
