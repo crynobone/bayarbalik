@@ -1,5 +1,7 @@
+root = @
+
 # Models
-DebtModel = Backbone.Model.extend
+class DebtModel extends Backbone.Model
     defaults:
         created_at: Date.now()
         updated_at: Date.now()
@@ -7,17 +9,17 @@ DebtModel = Backbone.Model.extend
         return @
 
 # Collection
-DebtsCollection = Backbone.Collection.extend
+class DebtsCollection extends Backbone.Collection
     model: DebtModel
     lawnchair: new Lawnchair({name: "Hutangs"}, new Function())
     initialize: ->
         @fetch()
         return @
 
-debts = window.debts = new DebtsCollection
+debts = root.debts = new DebtsCollection
 
 # Views
-NavbarView = Backbone.View.extend
+class NavbarView extends Backbone.View
     template: _.template $('#navbar-template').html()
     setActive: (id) ->
         $('[href=#' + id + ']').parent().addClass 'active'
@@ -35,7 +37,7 @@ NavbarView = Backbone.View.extend
 navbar = new NavbarView
     el: '#navbar'
 
-BaseView = Backbone.View.extend
+class BaseView extends Backbone.View
     render: (childView) ->
         if @child
             @child.undelegateEvents()
@@ -51,7 +53,7 @@ BaseView = Backbone.View.extend
     initialize: ->
         @render HomeView
 
-HomeView = Backbone.View.extend
+class HomeView extends Backbone.View
     template: _.template $('#output').html()
     render: ->
         @$el.html @template()
@@ -60,12 +62,12 @@ HomeView = Backbone.View.extend
         @render()
     hash: 'home'
 
-IOUIndexView = Backbone.View.extend
+class IOUIndexView extends Backbone.View
     collection: debts
     events:
         'change .recalculate': 'recalculate'
         'submit': (e) ->
-            e.preventDefault();
+            e.preventDefault()
             $.notify 'New debt created', 'success'
             this.collection.create @recalculate()
             false
@@ -73,7 +75,7 @@ IOUIndexView = Backbone.View.extend
         payment_interval = $('[name=payment_interval]:checked', @el).val()
         if payment_interval == 'Someday'
             $('.not-someday').hide()
-        else 
+        else
             $('.not-someday').show()
         loan_amount   = parseInt $('[name=loan_amount]', @el).val(), 10
         intervals     = parseInt $('[name=intervals]', @el).val(), 10
@@ -106,10 +108,10 @@ IOUIndexView = Backbone.View.extend
         @listenTo @collection, 'add update remove', @render
     hash: 'iou'
 
-UOMEIndexView = Backbone.View.extend
+class UOMEIndexView extends Backbone.View
     template: _.template $('#uome-index-template').html()
     render: ->
-        @$el.html @template()       
+        @$el.html @template()
         navbar.show()
     initialize: ->
         @render()
@@ -119,7 +121,7 @@ base = new BaseView
     el: '#output'
 
 # Router
-HutangRouter = Backbone.Router.extend
+class HutangRouter extends Backbone.Router
     routes:
         'iou'     : 'iouIndex'
         'iou:id'  : 'iouDetails'
