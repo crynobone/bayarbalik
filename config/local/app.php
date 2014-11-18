@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'providers' = append_config([
+    'providers' => append_config([
         'Orchestra\Installation\InstallerServiceProvider',
     ]),
 
