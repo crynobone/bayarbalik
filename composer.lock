@@ -346,12 +346,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "81614916082260c524b5a178e896f3f0ce79b820"
+                "reference": "19317c9a545c58d8274df23da96c0d2a9c261fc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/81614916082260c524b5a178e896f3f0ce79b820",
-                "reference": "81614916082260c524b5a178e896f3f0ce79b820",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/19317c9a545c58d8274df23da96c0d2a9c261fc6",
+                "reference": "19317c9a545c58d8274df23da96c0d2a9c261fc6",
                 "shasum": ""
             },
             "require": {
@@ -364,6 +364,7 @@
                 "jeremeamia/superclosure": "~1.0.1",
                 "league/flysystem": "0.6.*",
                 "monolog/monolog": "~1.6",
+                "mtdowling/cron-expression": "~1.0",
                 "nesbot/carbon": "~1.0",
                 "patchwork/utf8": "~1.1",
                 "php": ">=5.4.0",
@@ -453,7 +454,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-11-14 21:34:02"
+            "time": "2014-11-20 01:49:12"
         },
         {
             "name": "league/flysystem",
@@ -461,12 +462,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "bb681fdbf2e208e743fbd7c7e3bde9afea83b8ed"
+                "reference": "95d310c7b3720b73d6a7a2fd36b195fa47b4f73b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/bb681fdbf2e208e743fbd7c7e3bde9afea83b8ed",
-                "reference": "bb681fdbf2e208e743fbd7c7e3bde9afea83b8ed",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/95d310c7b3720b73d6a7a2fd36b195fa47b4f73b",
+                "reference": "95d310c7b3720b73d6a7a2fd36b195fa47b4f73b",
                 "shasum": ""
             },
             "require": {
@@ -540,7 +541,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2014-11-16 18:24:18"
+            "time": "2014-11-18 09:45:43"
         },
         {
             "name": "monolog/monolog",
@@ -613,6 +614,47 @@
                 "psr-3"
             ],
             "time": "2014-09-30 13:30:58"
+        },
+        {
+            "name": "mtdowling/cron-expression",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mtdowling/cron-expression.git",
+                "reference": "a47ac8d5ec15049013792401af5a4d13e3dbe7f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mtdowling/cron-expression/zipball/a47ac8d5ec15049013792401af5a4d13e3dbe7f6",
+                "reference": "a47ac8d5ec15049013792401af5a4d13e3dbe7f6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Cron": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
+            "keywords": [
+                "cron",
+                "schedule"
+            ],
+            "time": "2013-11-23 19:48:39"
         },
         {
             "name": "nesbot/carbon",
@@ -960,12 +1002,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/foundation.git",
-                "reference": "4a53122bc82dbdb9c298a9f17d028a2beca855af"
+                "reference": "66be9c18294f796c1f172f284c0b753911f802f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/foundation/zipball/4a53122bc82dbdb9c298a9f17d028a2beca855af",
-                "reference": "4a53122bc82dbdb9c298a9f17d028a2beca855af",
+                "url": "https://api.github.com/repos/orchestral/foundation/zipball/66be9c18294f796c1f172f284c0b753911f802f7",
+                "reference": "66be9c18294f796c1f172f284c0b753911f802f7",
                 "shasum": ""
             },
             "require": {
@@ -1028,7 +1070,7 @@
                 "orchestral",
                 "user-management"
             ],
-            "time": "2014-11-16 16:37:39"
+            "time": "2014-11-19 14:20:08"
         },
         {
             "name": "orchestra/html",
@@ -1283,12 +1325,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/model.git",
-                "reference": "5760be80aa12fcdb2056625d39c9f9c0f7e83a35"
+                "reference": "4bb5a617c95091d860ae8f90e2cd0acbfb2b2e2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/model/zipball/5760be80aa12fcdb2056625d39c9f9c0f7e83a35",
-                "reference": "5760be80aa12fcdb2056625d39c9f9c0f7e83a35",
+                "url": "https://api.github.com/repos/orchestral/model/zipball/4bb5a617c95091d860ae8f90e2cd0acbfb2b2e2d",
+                "reference": "4bb5a617c95091d860ae8f90e2cd0acbfb2b2e2d",
                 "shasum": ""
             },
             "require": {
@@ -1333,7 +1375,7 @@
                 "orchestra-platform",
                 "orchestral"
             ],
-            "time": "2014-11-11 02:28:08"
+            "time": "2014-11-19 08:29:36"
         },
         {
             "name": "orchestra/notifier",
@@ -1573,12 +1615,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/support.git",
-                "reference": "a14e77cd4edf4b428d4ee44ea6f3358a211ffc76"
+                "reference": "c359ec8470f2fe23ec86fc8d54cd1fdc991b899b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/support/zipball/a14e77cd4edf4b428d4ee44ea6f3358a211ffc76",
-                "reference": "a14e77cd4edf4b428d4ee44ea6f3358a211ffc76",
+                "url": "https://api.github.com/repos/orchestral/support/zipball/c359ec8470f2fe23ec86fc8d54cd1fdc991b899b",
+                "reference": "c359ec8470f2fe23ec86fc8d54cd1fdc991b899b",
                 "shasum": ""
             },
             "require": {
@@ -1635,7 +1677,7 @@
                 "utilities",
                 "validator"
             ],
-            "time": "2014-11-11 10:01:44"
+            "time": "2014-11-18 06:38:10"
         },
         {
             "name": "orchestra/translation",
@@ -2809,12 +2851,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench.git",
-                "reference": "813a559b7cf3cc2c521daf5303ec695c3d1d0be8"
+                "reference": "3859780de925259e091504f2509004b19cf58cf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench/zipball/813a559b7cf3cc2c521daf5303ec695c3d1d0be8",
-                "reference": "813a559b7cf3cc2c521daf5303ec695c3d1d0be8",
+                "url": "https://api.github.com/repos/orchestral/testbench/zipball/3859780de925259e091504f2509004b19cf58cf5",
+                "reference": "3859780de925259e091504f2509004b19cf58cf5",
                 "shasum": ""
             },
             "require": {
@@ -2862,7 +2904,7 @@
                 "orchestral",
                 "testing"
             ],
-            "time": "2014-11-16 09:13:50"
+            "time": "2014-11-19 14:13:17"
         },
         {
             "name": "phpunit/php-code-coverage",
