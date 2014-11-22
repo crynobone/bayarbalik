@@ -14,7 +14,7 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix
         .less("application.less")
-        .styles(["../components/animate.css/animate.min.css", "css/application.css"])
+        .styles(["css/application.css"])
         .coffee()
         .scripts([
             "../components/jquery/dist/jquery.min.js",
@@ -28,6 +28,9 @@ elixir(function(mix) {
             "../components/numeral/min/numeral.min.js",
             "../components/notifyjs/dist/notify-combined.min.js",
             "../components/lil-uuid/uuid.min.js",
+            "../components/moment/moment.js",
+            "../components/bootstrap/dist/js/bootstrap.min.js",
+            "../components/bootbox/bootbox.js",
             "js/application.js"
         ])
         .version(["css/all.css", "js/all.js"])
