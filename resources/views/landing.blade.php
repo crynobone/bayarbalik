@@ -122,7 +122,7 @@
     <a href="#iou">← Back</a>
     <div class="clearfix"></div>
     <br>
-    <table class="lead table-striped table-hover table-bordered table">
+    <table class="table-striped table-hover table-bordered table">
         <thead>
             <tr>
                 <th>-</th>
